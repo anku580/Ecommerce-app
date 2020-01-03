@@ -53,7 +53,7 @@ public class ItemControllerTest {
         ResponseEntity<Item> response = itemController.getItemById(1L);
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("Apple", response.getBody().getName());
-        assertEquals("It is a fruit", response.getBody().getDescription());
+        assertEquals("It's a fruit", response.getBody().getDescription());
     }
 
     @Test

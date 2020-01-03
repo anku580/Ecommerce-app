@@ -38,7 +38,7 @@ public class UserControllerTest {
 
     @Test
     public void create_user_happy_path() throws Exception{
-        Mockito.when(encoder.encode("test1")).thenReturn("thisIsHashed");
+        Mockito.when(encoder.encode("test123456")).thenReturn("thisIsHashed");
         CreateUserRequest r = new CreateUserRequest();
         r.setUsername("test");
         r.setPassword("test123456");

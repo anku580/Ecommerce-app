@@ -69,7 +69,7 @@ public class OrderControllerTest {
         ResponseEntity<UserOrder> response = orderController.submit(user.getUsername());
         assertEquals(200, response.getStatusCodeValue());
         UserOrder output = response.getBody();
-        assertEquals("It is a fruit", output.getItems().get(0).getDescription());
+        assertEquals("It's a fruit", output.getItems().get(0).getDescription());
     }
 
     @Test
