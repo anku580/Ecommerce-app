@@ -13,6 +13,9 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+import java.util.Objects;
+
 
 @Entity
 @Table(name = "user")
@@ -26,12 +29,23 @@ public class User {
 	@Column(nullable = false, unique = true)
 	@JsonProperty
 	private String username;
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@Column(nullable = false)
+	private String password;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
 	@JsonIgnore
     private Cart cart;
-	
+
+	public User() {
+
+	}
+
+	public User(String username, String password) {
+	}
+
 	public Cart getCart() {
 		return cart;
 	}
@@ -52,10 +66,31 @@ public class User {
 		return username;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		User user = (User) o;
+		return id == user.id &&
+				Objects.equals(username, user.username) &&
+				Objects.equals(password, user.password) &&
+				Objects.equals(cart, user.cart);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, username, password, cart);
+	}
 }
